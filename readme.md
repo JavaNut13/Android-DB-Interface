@@ -2,6 +2,10 @@ _DBInterface_ is a simple wrapper that sits on top of the standard Android SQLit
 
 It also includes a query builder inspired by [Arel](https://github.com/rails/arel), to reduce the amount of raw SQL that hasa to be written, but maintaining the ability to use SQL when it is necessary.
 
+## How to:
+
+Clone the repo, chuck the _dbinterface_ folder into your project (`Record`, `DBInterface` and `Query` are required). Create a class for each table in your database, look at `Person` or `Location` for examples.
+
 # E.G.
 
 ### Creating records
