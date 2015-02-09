@@ -124,6 +124,12 @@ public class Query {
 	public Query in(Record cl) {
 		return from(Record.getTableName(cl.getClass()));
 	}
+	public Query from(Class<? extends Record> cl) {
+		return from(Record.getTableName(cl));
+	}
+	public Query from(Record cl) {
+		return from(Record.getTableName(cl.getClass()));
+	}
 	public int insert(ContentValues values) {
 		return (int) database.insert(table, null, values);
 	}

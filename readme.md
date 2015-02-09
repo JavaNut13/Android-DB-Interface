@@ -4,6 +4,8 @@ It also includes a query builder inspired by [Arel](https://github.com/rails/are
 
 # E.G.
 
+### Creating records
+
 Two example records - `Person` and `Location` - are given to show how to extend the `Record` class.
 
 Create a Location:
@@ -31,9 +33,23 @@ Get a single location by ID:
 
 Get a list of people:
 
+    DBInterface dbi = new DBInterface(getContext()).open();
+    Query search = new Query(dbi).in(Person.class).where("name like ?", SEARCH_PARAMS);
+    ArrayList<Person> people = Person.getAll(search.all());
+    dbi.close()
+    // use people for something handy
     
+### Performing queries
+
+The methods in the `Query` class can be chained together in any order. Each one sets the corresponding section of a normal android SQL query:
+
+    database.query(table, select, where, whereargs, groupBy, null, orderBy);
+    
+> NOTE: `in()` or `from()` should be called on _every_ query, otherwise it won't know where to do the query.
+
+If the same method is called twice, it is likely not going to chain the clauses together (for example `where(things).where(otherthings)` is not fully tested) will **NOT** work as you would expect. This is something that should be improved in the future.
     
 ## To do
 
-- Better query building
+- Better query building (Perhaps with an object that builds the `where` clause?)
 - Move `getAll()` to `Record`
